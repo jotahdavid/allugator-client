@@ -1,11 +1,29 @@
+import { useEffect, useState } from 'react';
 import { CaretDown } from 'phosphor-react';
 
+import ProductsService, { ProductResponse } from '@services/ProductsService';
+
 import { Search } from '@components/Search';
-import { ProductCard } from './ProductCard';
+import { ProductCard } from '@components/ProductList/ProductCard';
 
 import * as Styled from './styles';
 
+type Product = ProductResponse;
+
 export function ProductList() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const productList = await ProductsService.listProducts();
+        setProducts(productList);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <Styled.Header>
@@ -23,13 +41,21 @@ export function ProductList() {
             <CaretDown color="#171717" size={20} weight="bold" />
           </Styled.SelectContainer>
 
-          <span>10 itens</span>
+          <span>
+            {products.length}
+            &nbsp;
+            {products.length === 1 ? 'item' : 'itens'}
+          </span>
         </Styled.Filters>
       </Styled.Header>
 
       <Styled.Section>
-        {Array.from({ length: 8 }).map(() => (
-          <ProductCard />
+        {products.map((product) => (
+          <ProductCard
+            imageUrl={product.imageUrl}
+            name={product.name}
+            price={product.rentPrice}
+          />
         ))}
       </Styled.Section>
     </>

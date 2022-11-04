@@ -1,17 +1,32 @@
+import R$ from '@utils/formatCurrency';
+
 import * as Styled from './styles';
 
-import iPhoneImg from '@assets/images/iphone.png';
+interface ProductCardProps {
+  imageUrl: string;
+  name: string;
+  price: number;
+}
 
-export function ProductCard() {
+export function ProductCard({ imageUrl, name, price }: ProductCardProps) {
   return (
     <Styled.Card>
       <Styled.Preview>
-        <img src={iPhoneImg} alt="iPhone" />
+        <img
+          src={imageUrl}
+          alt={`Imagem do ${name}`}
+        />
       </Styled.Preview>
 
       <Styled.Details>
-        <span className="title">iPhone 12 XS</span>
-        <span className="price">R$ 3.150,00/ano</span>
+        <span className="title">
+          {name}
+        </span>
+
+        <span className="price">
+          {R$(price)}
+          /ano
+        </span>
       </Styled.Details>
     </Styled.Card>
   );

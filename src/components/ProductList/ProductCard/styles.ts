@@ -3,7 +3,11 @@ import { rem } from '@assets/styles/utils';
 
 export const Preview = styled.div`
   width: 100%;
+  height: 100%;
   background-color: #EBEBEB;
+  display: flex;
+  align-items: center;
+
   border-radius: 4px 4px 0 0;
   padding: ${rem(8)} 0;
 
@@ -34,6 +38,7 @@ export const Preview = styled.div`
 
   > img {
     display: block;
+    max-height: 100%;
     max-width: ${rem(160)};
     margin: 0 auto;
   }
@@ -42,6 +47,7 @@ export const Preview = styled.div`
 export const Card = styled.div`
   width: 100%;
   max-width: ${rem(260)};
+  height: ${rem(240)};
 
   display: flex;
   flex-direction: column;
