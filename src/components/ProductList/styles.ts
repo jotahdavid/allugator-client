@@ -39,6 +39,7 @@ export const Select = styled.select`
   min-width: ${rem(160)};
   background-color: #fff;
   padding: ${rem(12)} ${rem(24)};
+  padding-right: ${rem(40)};
 
   outline: none;
   appearance: none;
