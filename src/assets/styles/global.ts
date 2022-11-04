@@ -17,4 +17,8 @@ export default createGlobalStyle`
   body {
     font-family: 'Inter', sans-serif;
   }
+
+  button {
+    cursor: pointer;
+  }
 `;

@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart } from 'phosphor-react';
 
 import {
@@ -9,12 +10,14 @@ interface HeaderProps {
 }
 
 export function Header({ isLogged }: HeaderProps) {
+  const location = useLocation();
+
   return (
     <Container>
       <StyledHeader>
         <NavLinks>
-          <NavLink active>
-            <a href="/">Produtos</a>
+          <NavLink active={location.pathname === '/'}>
+            <Link to="/">Produtos</Link>
           </NavLink>
         </NavLinks>
 
