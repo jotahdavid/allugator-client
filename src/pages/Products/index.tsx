@@ -3,7 +3,7 @@ import { ProductList } from '@components/ProductList';
 
 import { Container } from './styles';
 
-export function Home() {
+export function Products() {
   return (
     <>
       <Header />
