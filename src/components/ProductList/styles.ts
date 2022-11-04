@@ -60,3 +60,12 @@ export const Select = styled.select`
     color: red;
   }
 `;
+
+export const Section = styled.section`
+  padding-top: ${rem(32)};
+
+  display: grid;
+  grid-template-columns: repeat(4, max(${rem(260)}));
+  justify-content: space-between;
+  row-gap: ${rem(40)};
+`;
