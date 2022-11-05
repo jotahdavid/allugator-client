@@ -14,7 +14,10 @@ export const InputField = forwardRef<null, InputProps>(({
   const id = useId();
 
   return (
-    <Styled.Label htmlFor={id}>
+    <Styled.Label
+      htmlFor={id}
+      error={Boolean(error)}
+    >
       <Styled.Input
         {...props}
         ref={ref}

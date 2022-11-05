@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { rem } from '@assets/styles/utils';
 
-export const Label = styled.label`
+type StyledLabelProps = {
+  error?: boolean;
+};
+
+export const Label = styled.label<StyledLabelProps>`
   display: block;
   font-size: 1rem;
   color: #222222;
@@ -9,7 +13,7 @@ export const Label = styled.label`
 
   .label {
     position: absolute;
-    top: 50%;
+    top: calc(50% - ${({ error }) => (error ? '22px / 2' : '0%')});
     left: 1rem;
     transform: translateY(-50%);
 
@@ -34,6 +38,10 @@ export const Label = styled.label`
     }
   }
 `;
+
+Label.defaultProps = {
+  error: false,
+};
 
 type StyledInputProps = {
   hasLabel: boolean;
