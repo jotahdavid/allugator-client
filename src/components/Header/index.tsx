@@ -1,4 +1,4 @@
-import { ReactNode, Children, useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, User } from 'phosphor-react';
 
@@ -8,7 +8,7 @@ import * as Styled from './styles';
 export function Header() {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, handleLogout } = useAuth();
 
   const location = useLocation();
 

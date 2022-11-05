@@ -12,6 +12,7 @@ interface AuthContextValue {
   isLoading: boolean;
   handleRegister: (newUser: UserCreation) => Promise<void>;
   handleLogin: (userCredential: UserCredential) => Promise<void>;
+  handleLogout: () => void;
 }
 
 export const AuthContext = createContext({} as AuthContextValue);
@@ -61,13 +62,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     setUser(userLogged);
   }, []);
 
+  const handleLogout = useCallback(() => {
+    cookies.remove('allugacell.token');
+    setUser(null);
+  }, []);
+
   const authContextValue = useMemo<AuthContextValue>(() => ({
     user,
     isLoading,
     isAuthenticated,
     handleRegister,
     handleLogin,
-  }), [user, isLoading, isAuthenticated, handleRegister, handleLogin]);
+    handleLogout,
+  }), [user, isLoading, isAuthenticated, handleRegister, handleLogin, handleLogout]);
 
   return (
     <AuthContext.Provider value={authContextValue}>
