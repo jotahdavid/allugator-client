@@ -9,11 +9,19 @@ export interface ProductResponse {
   description: string | null;
 }
 
+export interface OrderBy {
+  field: 'name' | 'price';
+  order: 'asc' | 'desc'
+}
+
 class ProductsService {
   private http = new HttpClient('http://localhost:3001');
 
-  async listProducts() {
-    const response = await this.http.get<ProductResponse[]>('/products');
+  async listProducts(orderBy?: Partial<OrderBy>) {
+    const direction = orderBy?.order === 'desc' ? 'desc' : 'asc';
+    const field = orderBy?.field === 'price' ? 'price' : 'name';
+
+    const response = await this.http.get<ProductResponse[]>(`/products?orderBy=${field}&order=${direction}`);
 
     return response.data;
   }
