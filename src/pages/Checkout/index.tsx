@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import cookies from 'js-cookie';
+import axios from 'axios';
 
 import ProductsService from '@services/ProductsService';
 import { useAuth } from '@hooks/useAuth';
@@ -10,6 +12,7 @@ import { useAuth } from '@hooks/useAuth';
 import { Header } from '@components/Header';
 import { InputField } from '@components/InputField';
 import * as Styled from './styles';
+import SubscriptionsService from '@services/SubscriptionsService';
 
 const checkoutSchema = z.object({
   name: z.string().min(1, 'Campo obrigatório'),
@@ -22,7 +25,11 @@ const checkoutSchema = z.object({
 type CheckoutData = z.infer<typeof checkoutSchema>;
 
 export function Checkout() {
-  const { register, handleSubmit, formState: { errors } } = useForm<CheckoutData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<CheckoutData>({
     resolver: zodResolver(checkoutSchema),
     mode: 'all',
   });
@@ -51,9 +58,27 @@ export function Checkout() {
     })();
   }, [productId, navigate]);
 
-  const onSubmit: SubmitHandler<CheckoutData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<CheckoutData> = async () => {
+    try {
+      const token = cookies.get('allugacell.token');
+
+      if (!token) return;
+
+      await SubscriptionsService.createSubscriptionByToken(token, productId!);
+
+      navigate('/subscriptions');
+    } catch (err) {
+      if (!(err instanceof axios.AxiosError)) {
+        console.error(err);
+        return;
+      }
+
+      // eslint-disable-next-line no-alert
+      alert(err.response?.data.error ?? 'Something went wrong');
+    }
   };
+
+  console.log(errors);
 
   if (isLoading) {
     return null;
@@ -102,15 +127,15 @@ export function Checkout() {
           <Styled.Side>
             <h2 className="title">Detalhes de pagamento</h2>
 
-            <InputField label="Número do cartão" value="5599 1050 4341 1183" />
+            <InputField label="Número do cartão" defaultValue="5599 1050 4341 1183" />
 
-            <InputField label="CVV" value="943" />
+            <InputField label="CVV" defaultValue="943" />
 
-            <InputField label="Data de expiração" value="03/24" />
+            <InputField label="Data de expiração" defaultValue="03/24" />
 
-            <InputField label="Nome no cartão" value={user?.name} />
+            <InputField label="Nome no cartão" defaultValue={user?.name} />
 
-            <Styled.Button>
+            <Styled.Button disabled={!isValid || isSubmitting}>
               Finalizar
             </Styled.Button>
           </Styled.Side>
