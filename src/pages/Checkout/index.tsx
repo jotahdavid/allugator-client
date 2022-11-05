@@ -125,13 +125,29 @@ export function Checkout() {
           <Styled.Side>
             <h2 className="title">Detalhes de pagamento</h2>
 
-            <InputField label="Número do cartão" defaultValue="5599 1050 4341 1183" />
+            <InputField
+              label="Número do cartão"
+              defaultValue="5599 1050 4341 1183"
+              disabled
+            />
 
-            <InputField label="CVV" defaultValue="943" />
+            <InputField
+              label="CVV"
+              defaultValue="943"
+              disabled
+            />
 
-            <InputField label="Data de expiração" defaultValue="03/24" />
+            <InputField
+              label="Data de expiração"
+              defaultValue="03/24"
+              disabled
+            />
 
-            <InputField label="Nome no cartão" defaultValue={user?.name} />
+            <InputField
+              label="Nome no cartão"
+              defaultValue={user?.name}
+              disabled
+            />
 
             <Styled.Button disabled={!isValid || isSubmitting}>
               Finalizar
