@@ -25,9 +25,11 @@ export function Header({ isLogged }: HeaderProps) {
           <ShoppingCart color="#fff" size={40} />
 
           {!isLogged && (
-            <LoginButton>
-              Log In
-            </LoginButton>
+            <Link to="/login">
+              <LoginButton>
+                Log In
+              </LoginButton>
+            </Link>
           )}
         </AccountIcons>
       </StyledHeader>
