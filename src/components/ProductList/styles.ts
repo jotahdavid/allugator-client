@@ -56,19 +56,15 @@ export const Select = styled.select`
   &:active {
     border-color: rgba(23, 23, 23, 1);
   }
-
-  &[value="a-z"] {
-    color: red;
-  }
 `;
 
 export const Section = styled.section`
   padding-top: ${rem(32)};
 
   display: grid;
-  grid-template-columns: repeat(4, max(${rem(260)}));
-  justify-content: space-between;
-  row-gap: ${rem(40)};
+  grid-template-columns: repeat(auto-fill, ${rem(260)});
+  justify-content: space-evenly;
+  gap: ${rem(40)} ${rem(16)};
 
   a {
     text-decoration: none;
