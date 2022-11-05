@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, User } from 'phosphor-react';
+import { User } from 'phosphor-react';
 
 import { useAuth } from '@hooks/useAuth';
 import * as Styled from './styles';
@@ -26,16 +26,14 @@ export function Header() {
         </Styled.NavLinks>
 
         <Styled.AccountIcons>
-          <ShoppingCart color="#fff" size={40} />
-
           {location.pathname !== '/login' && (
             <>
               {(!isAuthenticated || isLoading) && (
-              <Link to="/login">
-                <Styled.LoginButton disabled={isLoading}>
-                  Log In
-                </Styled.LoginButton>
-              </Link>
+                <Link to="/login">
+                  <Styled.LoginButton disabled={isLoading}>
+                    Log In
+                  </Styled.LoginButton>
+                </Link>
               )}
 
               {isAuthenticated && (
