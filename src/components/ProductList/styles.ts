@@ -69,4 +69,8 @@ export const Section = styled.section`
   grid-template-columns: repeat(4, max(${rem(260)}));
   justify-content: space-between;
   row-gap: ${rem(40)};
+
+  a {
+    text-decoration: none;
+  }
 `;

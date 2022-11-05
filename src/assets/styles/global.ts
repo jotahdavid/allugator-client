@@ -9,7 +9,8 @@ export default createGlobalStyle`
 
   html,
   body,
-  #root {
+  #root,
+  #modal-root {
     width: 100%;
     height: 100%;
   }

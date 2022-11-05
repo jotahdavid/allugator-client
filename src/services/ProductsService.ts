@@ -22,7 +22,11 @@ class ProductsService {
     const field = orderBy?.field === 'price' ? 'price' : 'name';
 
     const response = await this.http.get<ProductResponse[]>(`/products?orderBy=${field}&order=${direction}`);
+    return response.data;
+  }
 
+  async getProductById(productId: string) {
+    const response = await this.http.get<ProductResponse>(`/products/${productId}`);
     return response.data;
   }
 }

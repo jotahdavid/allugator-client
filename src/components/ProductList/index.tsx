@@ -1,6 +1,7 @@
 import {
   ChangeEvent, useEffect, useMemo, useState,
 } from 'react';
+import { Link } from 'react-router-dom';
 import { CaretDown } from 'phosphor-react';
 
 import ProductsService, { OrderBy, ProductResponse } from '@services/ProductsService';
@@ -97,11 +98,13 @@ export function ProductList() {
 
       <Styled.Section>
         {filteredProducts.map((product) => (
-          <ProductCard
-            imageUrl={product.imageUrl}
-            name={product.name}
-            price={product.rentPrice}
-          />
+          <Link key={product.id} to={`/product/${product.id}`}>
+            <ProductCard
+              imageUrl={product.imageUrl}
+              name={product.name}
+              price={product.rentPrice}
+            />
+          </Link>
         ))}
       </Styled.Section>
     </>
