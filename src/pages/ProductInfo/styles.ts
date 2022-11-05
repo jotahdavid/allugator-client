@@ -72,6 +72,10 @@ export const Details = styled.div`
     font-size: ${rem(16)};
     font-family: inherit;
   }
+
+  > a {
+    text-decoration: none;
+  }
 `;
 
 export const Rent = styled.button`

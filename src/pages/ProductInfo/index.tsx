@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ShoppingBag } from 'phosphor-react';
 
 import ProductsService, { ProductResponse } from '@services/ProductsService';
@@ -57,10 +57,12 @@ export function ProductInfo() {
 
           <p>Período de assinatura: 12 meses</p>
 
-          <Styled.Rent>
-            <ShoppingBag weight="bold" size={24} />
-            Alugar
-          </Styled.Rent>
+          <Link to={`/checkout/${product.id}`}>
+            <Styled.Rent>
+              <ShoppingBag weight="bold" size={24} />
+              Alugar
+            </Styled.Rent>
+          </Link>
         </Styled.Details>
       </Styled.Container>
     </>
