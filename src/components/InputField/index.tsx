@@ -4,19 +4,29 @@ import { XCircle } from 'phosphor-react';
 import * as Styled from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
   error?: string
 }
 
-export const InputField = forwardRef<null, InputProps>(({ error, ...props }, ref) => {
+export const InputField = forwardRef<null, InputProps>(({
+  error, label, placeholder, ...props
+}, ref) => {
   const id = useId();
 
   return (
     <Styled.Label htmlFor={id}>
       <Styled.Input
+        {...props}
         ref={ref}
         id={id}
-        {...props}
+        hasLabel={Boolean(label)}
+        placeholder={label || placeholder}
       />
+      {label && (
+        <span className="label">
+          {label}
+        </span>
+      )}
 
       {error && (
         <Styled.ErrorMessage className="pl-1 mt-1 text-xs text-red-500">
@@ -29,5 +39,6 @@ export const InputField = forwardRef<null, InputProps>(({ error, ...props }, ref
 });
 
 InputField.defaultProps = {
+  label: '',
   error: '',
 };
