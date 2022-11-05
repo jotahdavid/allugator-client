@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { Products } from '@pages/Products';
 import { Login } from '@pages/Login';
 import { ProductInfo } from '@pages/ProductInfo';
-import { SubscriptionHistory } from '@pages/Subscriptions';
+import { SubscriptionHistory } from '@pages/SubscriptionHistory';
 
 export default function AppRoutes() {
   return (

@@ -1,7 +1,7 @@
 import HttpClient from '@services/HttpClient';
 import { ProductResponse } from '@services/ProductsService';
 
-interface SubscriptionResponse {
+export interface SubscriptionResponse {
   id: string;
   price: number;
   expiresAt: string;

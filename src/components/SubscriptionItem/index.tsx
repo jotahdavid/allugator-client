@@ -1,13 +1,23 @@
 import * as Styled from './styles';
 
-import iPhoneImg from '@assets/images/iphone.png';
 import R$ from '@utils/formatCurrency';
+import formatDate from '@utils/formatDate';
 
-export function Subscription() {
+interface SubscriptionItemProps {
+  imageUrl: string;
+  name: string;
+  price: number;
+  active: boolean;
+  expiresAt: Date;
+}
+
+export function SubscriptionItem({
+  imageUrl, name, price, active, expiresAt,
+}: SubscriptionItemProps) {
   return (
     <Styled.Container>
       <Styled.Preview>
-        <img src={iPhoneImg} alt="Imagem do iPhone" />
+        <img src={imageUrl} alt={`Imagem do ${name}`} />
       </Styled.Preview>
 
       <Styled.Details>
@@ -15,16 +25,17 @@ export function Subscription() {
           iPhone XS
         </h4>
         <span className="product-price">
-          {R$(3150)}
+          {R$(price)}
         </span>
         <strong className="product-status">
-          Status: ATIVO
+          Status:&nbsp;
+          {active ? 'ATIVO' : 'EXPIRADO'}
         </strong>
       </Styled.Details>
 
       <Styled.DueDate>
         <strong>Data de vencimento</strong>
-        27 de novembro de 2023
+        {formatDate(expiresAt)}
       </Styled.DueDate>
     </Styled.Container>
   );
