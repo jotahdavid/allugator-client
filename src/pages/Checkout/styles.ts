@@ -9,13 +9,15 @@ export const Container = styled.main`
   width: 90%;
   max-width: ${rem(1280)};
   margin: 0 auto;
-
-  background-color: #F8F8F8;
 `;
 
 export const Form = styled.form`
   display: flex;
   width: 100%;
+  background-color: #F8F8F8;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+
   position: relative;
 
   &::after {
