@@ -57,7 +57,7 @@ export function Header() {
                   </Styled.Button>
                   {showUserDropdown && (
                     <Dropdown>
-                      <Link to="/">Assinaturas</Link>
+                      <Link to="/subscriptions">Assinaturas</Link>
                       <Styled.Button>Sair</Styled.Button>
                     </Dropdown>
                   )}
