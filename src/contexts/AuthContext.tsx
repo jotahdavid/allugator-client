@@ -1,8 +1,6 @@
-/* eslint-disable no-alert */
 import {
   createContext, ReactNode, useCallback, useMemo, useState,
 } from 'react';
-import axios from 'axios';
 import cookies from 'js-cookie';
 
 import UsersService, { User, UserCreation, UserCredential } from '@services/UsersService';
@@ -28,35 +26,17 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const domain = window.location.host;
 
   const handleRegister = useCallback(async (newUser: UserCreation) => {
-    setIsLoading(true);
-    try {
-      const { user: userLogged, token } = await UsersService.createUser(newUser);
+    const { user: userLogged, token } = await UsersService.createUser(newUser);
 
-      cookies.set('allugacell.token', token, { domain });
-      setUser(userLogged);
-    } catch (err) {
-      if (!(err instanceof axios.AxiosError)) return;
-
-      alert(err.message);
-    } finally {
-      setIsLoading(false);
-    }
+    cookies.set('allugacell.token', token, { domain });
+    setUser(userLogged);
   }, [domain]);
 
   const handleLogin = useCallback(async (userCredential: UserCredential) => {
-    setIsLoading(true);
-    try {
-      const { user: userLogged, token } = await UsersService.login(userCredential);
+    const { user: userLogged, token } = await UsersService.login(userCredential);
 
-      cookies.set('allugacell.token', token, { domain });
-      setUser(userLogged);
-    } catch (err) {
-      if (!(err instanceof axios.AxiosError)) return;
-
-      alert(err.message);
-    } finally {
-      setIsLoading(false);
-    }
+    cookies.set('allugacell.token', token, { domain });
+    setUser(userLogged);
   }, [domain]);
 
   const isAuthenticated = Boolean(user);
