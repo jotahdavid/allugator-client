@@ -19,4 +19,22 @@ export const Container = styled.main`
 
 export const Subscriptions = styled.ul`
   list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const EmptySubscriptions = styled.div`
+  width: 90%;
+  max-width: ${rem(400)};
+  background-color: #EBEBEB;
+  color: rgba(23, 23, 23, 0.5);
+  padding: ${rem(26)} ${rem(20)};
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: ${rem(20)};
 `;

@@ -78,8 +78,6 @@ export function Checkout() {
     }
   };
 
-  console.log(errors);
-
   if (isLoading) {
     return null;
   }

@@ -61,7 +61,13 @@ export function SubscriptionHistory() {
         <h1>Histórico de assinaturas</h1>
 
         <Styled.Subscriptions>
-          {subscriptions.map(({ product, ...subscription }) => (
+          {subscriptions.length < 1 && (
+            <Styled.EmptySubscriptions>
+              Nenhum assinatura foi realizada
+            </Styled.EmptySubscriptions>
+          )}
+
+          {subscriptions.length > 0 && subscriptions.map(({ product, ...subscription }) => (
             <SubscriptionItem
               key={subscription.id}
               imageUrl={product.imageUrl}

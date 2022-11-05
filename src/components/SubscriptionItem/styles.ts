@@ -6,6 +6,7 @@ type StyledContainerProps = {
 };
 
 export const Container = styled.div<StyledContainerProps>`
+  width: 100%;
   display: grid;
   grid-template-columns: ${rem(120)} repeat(2, 1fr);
   column-gap: ${rem(28)};
