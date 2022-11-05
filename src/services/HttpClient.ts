@@ -13,7 +13,7 @@ class HttpClient {
 
   constructor(baseURL: string) {
     this.makeRequest = axios.create({ baseURL });
-    this.makeRequest.interceptors.response.use(async (data) => {
+    this.makeRequest.interceptors.request.use(async (data) => {
       await delay(500);
       return data;
     });

@@ -21,23 +21,21 @@ interface AuthContextProviderProps {
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const domain = window.location.host;
+  const [isLoading] = useState(true);
 
   const handleRegister = useCallback(async (newUser: UserCreation) => {
     const { user: userLogged, token } = await UsersService.createUser(newUser);
 
-    cookies.set('allugacell.token', token, { domain });
+    cookies.set('allugacell.token', token, { sameSite: 'None', secure: true });
     setUser(userLogged);
-  }, [domain]);
+  }, []);
 
   const handleLogin = useCallback(async (userCredential: UserCredential) => {
     const { user: userLogged, token } = await UsersService.login(userCredential);
 
-    cookies.set('allugacell.token', token, { domain });
+    cookies.set('allugacell.token', token, { sameSite: 'None', secure: true });
     setUser(userLogged);
-  }, [domain]);
+  }, []);
 
   const isAuthenticated = Boolean(user);
 
