@@ -3,10 +3,13 @@ import {
 } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import z from 'zod';
+import axios from 'axios';
 
 import { Header } from '@components/Header';
 import { InputField } from '@components/InputField';
 import * as Styled from './styles';
+import { useAuth } from '@hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const accountSchema = z.object({
   tab: z.literal('signin'),
@@ -34,7 +37,11 @@ interface FormProps {
 type SignInValues = Account & { tab: 'signin' };
 
 function SignInForm({ onSubmit }: FormProps) {
-  const { handleSubmit, register, formState: { errors, isValid } } = useFormContext<SignInValues>();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid, isSubmitting },
+  } = useFormContext<SignInValues>();
 
   return (
     <Styled.Form onSubmit={handleSubmit(onSubmit)}>
@@ -51,7 +58,7 @@ function SignInForm({ onSubmit }: FormProps) {
         error={errors.password?.message}
       />
 
-      <Styled.ButtonSubmit disabled={!isValid}>
+      <Styled.ButtonSubmit disabled={!isValid || isSubmitting}>
         Entrar
       </Styled.ButtonSubmit>
     </Styled.Form>
@@ -62,7 +69,7 @@ type SignUpValues = Account & { tab: 'signup' };
 
 function SignUpForm({ onSubmit }: FormProps) {
   const {
-    handleSubmit, register, watch, trigger, formState: { errors, isValid },
+    handleSubmit, register, watch, trigger, formState: { errors, isValid, isSubmitting },
   } = useFormContext<SignUpValues>();
 
   function handlePasswordChange() {
@@ -97,7 +104,7 @@ function SignUpForm({ onSubmit }: FormProps) {
         error={errors.confirmPassword?.message}
       />
 
-      <Styled.ButtonSubmit disabled={!isValid}>
+      <Styled.ButtonSubmit disabled={!isValid || isSubmitting}>
         Registrar
       </Styled.ButtonSubmit>
     </Styled.Form>
@@ -115,6 +122,10 @@ export function Login() {
     },
   });
 
+  const { handleLogin, handleRegister } = useAuth();
+
+  const navigate = useNavigate();
+
   const tab = formMethods.watch('tab');
 
   function handleTabClick(tabClicked: Tab) {
@@ -123,8 +134,31 @@ export function Login() {
     }
   }
 
-  const onSubmit: SubmitHandler<Account> = async (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Account> = async (payload) => {
+    try {
+      if (payload.tab === 'signin') {
+        await handleLogin({
+          email: payload.email,
+          password: payload.password,
+        });
+      } else {
+        await handleRegister({
+          name: payload.name,
+          email: payload.email,
+          password: payload.password,
+        });
+      }
+
+      navigate('/');
+    } catch (err) {
+      if (!(err instanceof axios.AxiosError)) {
+        console.error(err);
+        return;
+      }
+
+      // eslint-disable-next-line no-alert
+      alert(err.response?.data.error ?? 'Something went wrong');
+    }
   };
 
   return (
