@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CaretDown } from 'phosphor-react';
 
 import ProductsService, { ProductResponse } from '@services/ProductsService';
@@ -12,6 +12,13 @@ type Product = ProductResponse;
 
 export function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredProducts = useMemo(() => (
+    products.filter((product) => (
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ))
+  ), [products, searchTerm]);
 
   useEffect(() => {
     (async () => {
@@ -24,10 +31,17 @@ export function ProductList() {
     })();
   }, []);
 
+  function handleChangeSearchTerm(newSearchTerm: string) {
+    setSearchTerm(newSearchTerm);
+  }
+
   return (
     <>
       <Styled.Header>
-        <Search />
+        <Search
+          placeholder="Nome do produto"
+          onSearch={handleChangeSearchTerm}
+        />
 
         <Styled.Filters>
           <Styled.SelectContainer>
@@ -42,15 +56,15 @@ export function ProductList() {
           </Styled.SelectContainer>
 
           <span>
-            {products.length}
+            {filteredProducts.length}
             &nbsp;
-            {products.length === 1 ? 'item' : 'itens'}
+            {filteredProducts.length === 1 ? 'item' : 'itens'}
           </span>
         </Styled.Filters>
       </Styled.Header>
 
       <Styled.Section>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <ProductCard
             imageUrl={product.imageUrl}
             name={product.name}

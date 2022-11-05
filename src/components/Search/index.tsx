@@ -1,16 +1,30 @@
+import { ChangeEvent } from 'react';
 import { MagnifyingGlass } from 'phosphor-react';
 
-import { Form, SearchInput } from './styles';
+import * as Styled from './styles';
 
-export function Search() {
+interface SearchProps {
+  placeholder?: string;
+  onSearch: (searchTerm: string) => void;
+}
+
+export function Search({ onSearch, placeholder }: SearchProps) {
+  function handleChangeSearchTerm(event: ChangeEvent<HTMLInputElement>) {
+    const newSearchTerm = event.target.value;
+    onSearch(newSearchTerm.trim());
+  }
+
   return (
-    <Form onSubmit={(e) => e.preventDefault()}>
-      <div>
-        <SearchInput placeholder="Nome do produto" />
-        <MagnifyingGlass color="#171717" size={20} weight="bold" />
-      </div>
-
-      <button type="submit">Buscar</button>
-    </Form>
+    <Styled.Container>
+      <Styled.SearchInput
+        placeholder={placeholder}
+        onChange={handleChangeSearchTerm}
+      />
+      <MagnifyingGlass color="#171717" size={20} weight="bold" />
+    </Styled.Container>
   );
 }
+
+Search.defaultProps = {
+  placeholder: '',
+};

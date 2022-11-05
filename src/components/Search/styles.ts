@@ -1,38 +1,14 @@
 import styled from 'styled-components';
 import { rem } from '@assets/styles/utils';
 
-export const Form = styled.form`
-  display: flex;
-  gap: 1rem;
+export const Container = styled.div`
+  position: relative;
 
-  > button {
-    background-color: #222222;
-    padding: ${rem(12)} ${rem(20)};
-    border: none;
-    border-radius: ${rem(8)};
-
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    color: #fff;
-
-    cursor: pointer;
-    transition: background-color 300ms ease;
-
-    &:hover {
-      background-color: #000;
-    }
-  }
-
-  > div {
-    position: relative;
-
-    svg {
-      position: absolute;
-      top: 50%;
-      left: ${rem(12)};
-      transform: translateY(-50%);
-    }
+  svg {
+    position: absolute;
+    top: 50%;
+    left: ${rem(12)};
+    transform: translateY(-50%);
   }
 `;
 
