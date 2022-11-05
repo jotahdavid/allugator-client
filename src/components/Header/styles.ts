@@ -7,7 +7,7 @@ export const Container = styled.div`
   background-color: #222222;
 `;
 
-export const StyledHeader = styled.header`
+export const Header = styled.header`
   max-width: ${rem(1280)};
   width: 100%;
   height: ${rem(80)};
@@ -87,11 +87,15 @@ export const LoginButton = styled.button`
   border-radius: ${rem(20)};
   background-color: #fff;
 
-  cursor: pointer;
   transition: background-color 300ms ease, color 200ms ease;
 
   &:hover {
     background-color: #000;
     color: #fff;
   }
+`;
+
+export const UserButton = styled.button`
+  border: none;
+  background-color: transparent;
 `;

@@ -1,42 +1,47 @@
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart } from 'phosphor-react';
+import { ShoppingCart, User } from 'phosphor-react';
 
-import {
-  Container, StyledHeader, NavLinks, NavLink, AccountIcons, LoginButton,
-} from './styles';
+import { useAuth } from '@hooks/useAuth';
+import * as Styled from './styles';
 
-interface HeaderProps {
-  isLogged?: boolean;
-}
+// interface HeaderProps {}
 
-export function Header({ isLogged }: HeaderProps) {
+export function Header() {
+  const { isAuthenticated, isLoading } = useAuth();
+
   const location = useLocation();
 
   return (
-    <Container>
-      <StyledHeader>
-        <NavLinks>
-          <NavLink active={location.pathname === '/'}>
+    <Styled.Container>
+      <Styled.Header>
+        <Styled.NavLinks>
+          <Styled.NavLink active={location.pathname === '/'}>
             <Link to="/">Produtos</Link>
-          </NavLink>
-        </NavLinks>
+          </Styled.NavLink>
+        </Styled.NavLinks>
 
-        <AccountIcons>
+        <Styled.AccountIcons>
           <ShoppingCart color="#fff" size={40} />
 
-          {!isLogged && (
-            <Link to="/login">
-              <LoginButton>
-                Log In
-              </LoginButton>
-            </Link>
+          {location.pathname !== '/login' && (
+            <>
+              {(!isAuthenticated || isLoading) && (
+              <Link to="/login">
+                <Styled.LoginButton disabled={isLoading}>
+                  Log In
+                </Styled.LoginButton>
+              </Link>
+              )}
+
+              {isAuthenticated && (
+              <Styled.UserButton>
+                <User color="#fff" size={40} />
+              </Styled.UserButton>
+              )}
+            </>
           )}
-        </AccountIcons>
-      </StyledHeader>
-    </Container>
+        </Styled.AccountIcons>
+      </Styled.Header>
+    </Styled.Container>
   );
 }
-
-Header.defaultProps = {
-  isLogged: false,
-};
