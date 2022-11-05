@@ -124,38 +124,6 @@ export const Dropdown = styled.ul`
   right: 0;
   transform: translateY(100%);
 
-  li {
-    position: relative;
-
-    &:not(:last-of-type) {
-      border-bottom: 2px solid rgba(255, 255, 255, 0.25);
-    }
-
-    &::after {
-      content: '';
-      display: block;
-      width: ${rem(180)};
-
-      position: absolute;
-      inset: 0;
-      left: -${rem(16)};
-
-      background-color: #373737;
-      z-index: -1;
-
-      transition: background-color 100ms ease;
-    }
-
-    &:hover::after {
-      background-color: #1e1e1e;
-    }
-
-    > * {
-    padding: ${rem(12)} 0;
-    display: block;
-  }
-  }
-
   button {
     width: 100%;
     text-align: left;
@@ -164,5 +132,37 @@ export const Dropdown = styled.ul`
   a {
     text-decoration: none;
     color: inherit;
+  }
+`;
+
+export const DropdownItem = styled.li`
+  position: relative;
+
+  &:not(:last-of-type) {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: ${rem(180)};
+
+    position: absolute;
+    inset: 0;
+    left: -${rem(16)};
+
+    background-color: #373737;
+    z-index: -1;
+
+    transition: background-color 100ms ease;
+  }
+
+  &:hover::after {
+    background-color: #1e1e1e;
+  }
+
+  > * {
+    padding: ${rem(12)} 0;
+    display: block;
   }
 `;

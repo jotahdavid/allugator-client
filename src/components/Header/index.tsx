@@ -5,18 +5,6 @@ import { ShoppingCart, User } from 'phosphor-react';
 import { useAuth } from '@hooks/useAuth';
 import * as Styled from './styles';
 
-function Dropdown({ children }: { children: ReactNode }) {
-  const childrens = Children.toArray(children);
-
-  return (
-    <Styled.Dropdown>
-      {childrens.map((child) => (
-        <li>{child}</li>
-      ))}
-    </Styled.Dropdown>
-  );
-}
-
 export function Header() {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
@@ -56,10 +44,14 @@ export function Header() {
                     <User color="#fff" size={40} />
                   </Styled.Button>
                   {showUserDropdown && (
-                    <Dropdown>
-                      <Link to="/subscriptions">Assinaturas</Link>
-                      <Styled.Button>Sair</Styled.Button>
-                    </Dropdown>
+                    <Styled.Dropdown>
+                      <Styled.DropdownItem>
+                        <Link to="/subscriptions">Assinaturas</Link>
+                      </Styled.DropdownItem>
+                      <Styled.DropdownItem>
+                        <Styled.Button onClick={handleLogout}>Sair</Styled.Button>
+                      </Styled.DropdownItem>
+                    </Styled.Dropdown>
                   )}
                 </>
               )}
