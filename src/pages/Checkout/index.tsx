@@ -1,11 +1,38 @@
-// import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Header } from '@components/Header';
-import * as Styled from './styles';
 import { InputField } from '@components/InputField';
+import * as Styled from './styles';
+import ProductsService from '@services/ProductsService';
 
 export function Checkout() {
-  // const { id: productId } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { id: productId } = useParams();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      try {
+        const product = await ProductsService.getProductById(productId!);
+
+        if (!product) {
+          navigate('/');
+        }
+      } catch {
+        navigate('/');
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [productId, navigate]);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <>
