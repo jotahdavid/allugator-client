@@ -12,6 +12,8 @@ import { useAuth } from '@hooks/useAuth';
 
 import { Header } from '@components/Header';
 import { InputField } from '@components/InputField';
+import { Loader } from '@components/Loader';
+
 import * as Styled from './styles';
 
 const checkoutSchema = z.object({
@@ -86,7 +88,7 @@ export function Checkout() {
   };
 
   if (isLoading) {
-    return null;
+    return <Loader loading />;
   }
 
   return (
