@@ -22,7 +22,7 @@ export function SubscriptionItem({
 
       <Styled.Details>
         <h4 className="product-name">
-          iPhone XS
+          {name}
         </h4>
         <span className="product-price">
           {R$(price)}
