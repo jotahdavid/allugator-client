@@ -5,14 +5,17 @@ export const Container = styled.main`
   display: flex;
   align-items: center;
 
-  height: 80%;
+  min-height: calc(100% - ${rem(80)});
   width: 90%;
   max-width: ${rem(1280)};
   margin: 0 auto;
+  padding: 2rem 0;
 `;
 
 export const Form = styled.form`
   display: flex;
+  flex: 1;
+  margin: auto;
   width: 100%;
   background-color: #F8F8F8;
   border-radius: 8px;
@@ -36,6 +39,14 @@ export const Form = styled.form`
   label {
     margin-bottom: ${rem(20)};
   }
+
+  @media screen and (max-width: ${rem(720)}) {
+    flex-direction: column;
+
+    &::after {
+      content: none;
+    }
+  }
 `;
 
 export const Side = styled.section`
@@ -48,6 +59,24 @@ export const Side = styled.section`
     color: rgba(34, 34, 34, 1);
 
     margin-bottom: ${rem(24)};
+  }
+
+  @media screen and (max-width: ${rem(720)}) {
+    padding: ${rem(28)};
+    position: relative;
+
+    &:not(:last-child)::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(34, 34, 34, 0.25);
+
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 `;
 
