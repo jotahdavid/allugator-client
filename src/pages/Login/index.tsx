@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   useForm, FormProvider, useFormContext, SubmitHandler,
 } from 'react-hook-form';
@@ -122,10 +123,18 @@ export function Login() {
     },
   });
 
-  const { handleLogin, handleRegister } = useAuth();
+  const {
+    handleLogin, handleRegister, isAuthenticated, isLoading: isAuthLoading,
+  } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (!isAuthLoading && isAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthLoading, isAuthenticated, navigate]);
 
   const tab = formMethods.watch('tab');
 
@@ -166,6 +175,10 @@ export function Login() {
       alert(err.response?.data.error ?? 'Something went wrong');
     }
   };
+
+  if (isAuthLoading || isAuthenticated) {
+    return null;
+  }
 
   return (
     <FormProvider {...formMethods}>
