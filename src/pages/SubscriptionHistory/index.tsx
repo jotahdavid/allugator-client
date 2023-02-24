@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import cookies from 'js-cookie';
 import axios from 'axios';
 
+import SubscriptionsService, { SubscriptionResponse } from '@services/SubscriptionsService';
 import { useAuth } from '@hooks/useAuth';
 
 import { Header } from '@components/Header';
 import { SubscriptionItem } from '@components/SubscriptionItem';
+import { Loader } from '@components/Loader';
+
 import * as Styled from './styles';
-import SubscriptionsService, { SubscriptionResponse } from '@services/SubscriptionsService';
 
 type Subscription = SubscriptionResponse;
 
@@ -50,7 +52,7 @@ export function SubscriptionHistory() {
   }, [navigate]);
 
   if (isLoading) {
-    return null;
+    return <Loader loading />;
   }
 
   return (
