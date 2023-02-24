@@ -47,6 +47,10 @@ export const Tab = styled.button<StyledTabProps>`
       opacity: 1;
     }
   `}
+
+  @media screen and (max-width: ${rem(720)}) {
+    font-size: ${rem(16)};
+  }
 `;
 
 Tab.defaultProps = {
