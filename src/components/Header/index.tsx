@@ -43,7 +43,7 @@ export function Header() {
                   </Styled.Button>
                   {showUserDropdown && (
                     <Styled.Dropdown>
-                      <Styled.DropdownItem>
+                      <Styled.DropdownItem disabled={location.pathname === '/subscriptions'}>
                         <Link to="/subscriptions">Assinaturas</Link>
                       </Styled.DropdownItem>
                       <Styled.DropdownItem>

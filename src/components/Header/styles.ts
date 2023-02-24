@@ -135,7 +135,11 @@ export const Dropdown = styled.ul`
   }
 `;
 
-export const DropdownItem = styled.li`
+type DropdownItemProps = {
+  disabled?: boolean;
+};
+
+export const DropdownItem = styled.li<DropdownItemProps>`
   position: relative;
 
   &:not(:last-of-type) {
@@ -160,6 +164,14 @@ export const DropdownItem = styled.li`
   &:hover::after {
     background-color: #1e1e1e;
   }
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+
+    &::after, &:hover::after {
+      background-color: #000;
+    }
+  `}
 
   > * {
     padding: ${rem(12)} 0;
