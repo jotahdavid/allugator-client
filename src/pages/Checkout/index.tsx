@@ -13,6 +13,7 @@ import { useAuth } from '@hooks/useAuth';
 import { Header } from '@components/Header';
 import { InputField } from '@components/InputField';
 import { Loader } from '@components/Loader';
+import { Spinner } from '@components/Spinner';
 
 import * as Styled from './styles';
 
@@ -159,6 +160,9 @@ export function Checkout() {
             />
 
             <Styled.Button disabled={!isValid || isSubmitting}>
+              {isSubmitting && (
+                <Spinner color="#FFF" size={16} />
+              )}
               Finalizar
             </Styled.Button>
           </Styled.Side>

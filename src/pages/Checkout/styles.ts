@@ -65,6 +65,11 @@ export const Button = styled.button`
 
   transition: background-color 300ms ease;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
   &:hover {
     background-color: rgba(23, 23, 23, 1);
   }
