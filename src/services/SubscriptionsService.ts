@@ -9,7 +9,7 @@ export interface SubscriptionResponse {
 }
 
 class SubscriptionsService {
-  private http = new HttpClient('http://localhost:3001');
+  private http = new HttpClient(import.meta.env.VITE_API_URL);
 
   async listSubscriptionsByToken(token: string) {
     const headers = {

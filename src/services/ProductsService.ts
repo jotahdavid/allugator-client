@@ -15,7 +15,7 @@ export interface OrderBy {
 }
 
 class ProductsService {
-  private http = new HttpClient('http://localhost:3001');
+  private http = new HttpClient(import.meta.env.VITE_API_URL);
 
   async listProducts(orderBy?: Partial<OrderBy>) {
     const direction = orderBy?.order === 'desc' ? 'desc' : 'asc';

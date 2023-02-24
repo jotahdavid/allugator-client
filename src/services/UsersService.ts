@@ -23,7 +23,7 @@ interface UserResponse {
 }
 
 class UsersService {
-  private http = new HttpClient('http://localhost:3001');
+  private http = new HttpClient(import.meta.env.VITE_API_URL);
 
   async createUser(user: UserCreation) {
     const response = await this.http.post<UserResponse, UserCreation>('/users', user);
