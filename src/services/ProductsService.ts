@@ -3,8 +3,8 @@ import HttpClient from '@services/HttpClient';
 export interface ProductResponse {
   id: string;
   name: string;
-  price: 5699;
-  rentPrice: 2569;
+  price: number;
+  rentPrice: number;
   imageUrl: string;
   description: string | null;
 }
