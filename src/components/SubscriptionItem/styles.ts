@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rem } from '@assets/styles/utils';
 
 type StyledContainerProps = {
-  active?: boolean;
+  disabled?: boolean;
 };
 
 export const Container = styled.div<StyledContainerProps>`
@@ -15,7 +15,13 @@ export const Container = styled.div<StyledContainerProps>`
   padding: ${rem(12)} ${rem(8)};
   border-bottom: 1px solid rgba(23, 23, 23, 0.25);
 
-  opacity: ${({ active }) => (active ? '1' : '0.5')};
+  opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};
+
+  ${({ disabled }) => disabled && css`
+    .product-name {
+      text-decoration: line-through;
+    }
+  `}
 `;
 
 export const Preview = styled.div`
@@ -38,7 +44,7 @@ export const Preview = styled.div`
 `;
 
 Container.defaultProps = {
-  active: true,
+  disabled: false,
 };
 
 export const Details = styled.div`

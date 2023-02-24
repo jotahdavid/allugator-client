@@ -51,6 +51,8 @@ export function SubscriptionHistory() {
     })();
   }, [navigate]);
 
+  const today = new Date();
+
   if (isLoading) {
     return <Loader loading />;
   }
@@ -75,7 +77,7 @@ export function SubscriptionHistory() {
               imageUrl={product.imageUrl}
               name={product.name}
               price={product.price}
-              active
+              active={today < new Date(subscription.expiresAt)}
               expiresAt={new Date(subscription.expiresAt)}
             />
           ))}

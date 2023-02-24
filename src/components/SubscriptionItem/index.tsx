@@ -15,7 +15,7 @@ export function SubscriptionItem({
   imageUrl, name, price, active, expiresAt,
 }: SubscriptionItemProps) {
   return (
-    <Styled.Container>
+    <Styled.Container disabled={!active}>
       <Styled.Preview>
         <img src={imageUrl} alt={`Imagem do ${name}`} />
       </Styled.Preview>
