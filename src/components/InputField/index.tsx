@@ -32,7 +32,7 @@ export const InputField = forwardRef<null, InputProps>(({
       )}
 
       {error && (
-        <Styled.ErrorMessage className="pl-1 mt-1 text-xs text-red-500">
+        <Styled.ErrorMessage>
           <XCircle size={16} weight="bold" />
           {error}
         </Styled.ErrorMessage>
