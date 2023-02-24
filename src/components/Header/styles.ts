@@ -17,6 +17,10 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: ${rem(900)}) {
+    padding: 0 ${rem(36)};
+  }
 `;
 
 export const NavLinks = styled.ul`

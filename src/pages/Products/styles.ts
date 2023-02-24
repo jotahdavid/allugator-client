@@ -7,4 +7,8 @@ export const Container = styled.div`
   margin: 0 auto;
 
   padding: 0 ${rem(60)};
+
+  @media screen and (max-width: ${rem(900)}) {
+    padding: 0 ${rem(36)};
+  }
 `;

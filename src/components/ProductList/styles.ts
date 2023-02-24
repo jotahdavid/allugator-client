@@ -1,26 +1,44 @@
 import styled from 'styled-components';
 
 import { rem } from '@assets/styles/utils';
+import * as SearchStyles from '@components/Search/styles';
 
 export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.5rem 1rem;
 
   padding: ${rem(36)} 0;
   border-bottom: 2px solid rgba(23, 23, 23, 0.5);
+
+  @media screen and (max-width: ${rem(900)}) {
+    flex-direction: column;
+
+    ${SearchStyles.Container} {
+      max-width: ${rem(420)};
+    }
+  }
 `;
 
 export const Filters = styled.div`
   display: flex;
   gap: ${rem(24)};
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 
   > span {
     font-size: ${rem(32)};
     color: #222222;
     text-transform: uppercase;
     letter-spacing: 0.025em;
+  }
+
+  @media screen and (max-width: ${rem(720)}) {
+    > span {
+      font-size: ${rem(24)};
+    }
   }
 `;
 
@@ -55,6 +73,12 @@ export const Select = styled.select`
   &:hover,
   &:active {
     border-color: rgba(23, 23, 23, 1);
+  }
+
+  @media screen and (max-width: ${rem(720)}) {
+    min-width: unset;
+    width: 100%;
+    font-size: ${rem(14)};
   }
 `;
 
