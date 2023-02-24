@@ -37,9 +37,15 @@ export function Checkout() {
   const { id: productId } = useParams();
   const navigate = useNavigate();
 
-  const { user } = useAuth();
+  const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();
 
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isAuthenticated && !isAuthLoading) {
+      navigate('/login', { replace: true });
+    }
+  }, [isAuthLoading, isAuthenticated, navigate]);
 
   useEffect(() => {
     (async () => {
