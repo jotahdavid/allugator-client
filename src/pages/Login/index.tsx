@@ -2,14 +2,14 @@ import {
   useForm, FormProvider, useFormContext, SubmitHandler,
 } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useLocation, useNavigate } from 'react-router-dom';
 import z from 'zod';
 import axios from 'axios';
 
+import { useAuth } from '@hooks/useAuth';
 import { Header } from '@components/Header';
 import { InputField } from '@components/InputField';
 import * as Styled from './styles';
-import { useAuth } from '@hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 
 const accountSchema = z.object({
   tab: z.literal('signin'),
@@ -125,6 +125,7 @@ export function Login() {
   const { handleLogin, handleRegister } = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const tab = formMethods.watch('tab');
 
@@ -147,6 +148,11 @@ export function Login() {
           email: payload.email,
           password: payload.password,
         });
+      }
+
+      if (location.state?.redirect) {
+        navigate(location.state.redirect);
+        return;
       }
 
       navigate('/');

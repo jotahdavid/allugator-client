@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,12 +7,12 @@ import cookies from 'js-cookie';
 import axios from 'axios';
 
 import ProductsService from '@services/ProductsService';
+import SubscriptionsService from '@services/SubscriptionsService';
 import { useAuth } from '@hooks/useAuth';
 
 import { Header } from '@components/Header';
 import { InputField } from '@components/InputField';
 import * as Styled from './styles';
-import SubscriptionsService from '@services/SubscriptionsService';
 
 const checkoutSchema = z.object({
   name: z.string().min(1, 'Campo obrigatório'),
@@ -36,6 +36,7 @@ export function Checkout() {
 
   const { id: productId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();
 
@@ -43,9 +44,9 @@ export function Checkout() {
 
   useEffect(() => {
     if (!isAuthenticated && !isAuthLoading) {
-      navigate('/login', { replace: true });
+      navigate('/login', { replace: true, state: { redirect: location.pathname } });
     }
-  }, [isAuthLoading, isAuthenticated, navigate]);
+  }, [isAuthLoading, isAuthenticated, navigate, location]);
 
   useEffect(() => {
     (async () => {
