@@ -6,6 +6,8 @@ import ProductsService, { ProductResponse } from '@services/ProductsService';
 import R$ from '@utils/formatCurrency';
 
 import { Header } from '@components/Header';
+import { Loader } from '@components/Loader';
+
 import * as Styled from './styles';
 
 type Product = ProductResponse;
@@ -34,7 +36,7 @@ export function ProductInfo() {
   }, [productId, navigate]);
 
   if (isLoading || !product) {
-    return null;
+    return <Loader loading />;
   }
 
   return (
