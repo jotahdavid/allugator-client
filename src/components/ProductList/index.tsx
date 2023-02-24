@@ -8,6 +8,7 @@ import ProductsService, { OrderBy, ProductResponse } from '@services/ProductsSer
 
 import { Search } from '@components/Search';
 import { ProductCard } from '@components/ProductList/ProductCard';
+import { Loader } from '@components/Loader';
 
 import * as Styled from './styles';
 
@@ -19,6 +20,7 @@ export function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState<OrderBy>();
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
   const filteredProducts = useMemo(() => (
     products.filter((product) => (
@@ -28,12 +30,14 @@ export function ProductList() {
 
   useEffect(() => {
     (async () => {
+      setIsLoadingProducts(true);
       try {
         const productList = await ProductsService.listProducts(filter);
-
         setProducts(productList);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoadingProducts(false);
       }
     })();
   }, [filter]);
@@ -97,7 +101,9 @@ export function ProductList() {
       </Styled.Header>
 
       <Styled.Section>
-        {filteredProducts.map((product) => (
+        <Loader loading={isLoadingProducts} />
+
+        {!isLoadingProducts && filteredProducts.map((product) => (
           <Link key={product.id} to={`/product/${product.id}`}>
             <ProductCard
               imageUrl={product.imageUrl}

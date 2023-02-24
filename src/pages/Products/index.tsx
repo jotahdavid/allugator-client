@@ -1,15 +1,15 @@
 import { Header } from '@components/Header';
 import { ProductList } from '@components/ProductList';
 
-import { Container } from './styles';
+import * as Styled from './styles';
 
 export function Products() {
   return (
     <>
       <Header />
-      <Container as="main">
+      <Styled.Container as="main">
         <ProductList />
-      </Container>
+      </Styled.Container>
     </>
   );
 }
