@@ -185,7 +185,7 @@ export function Login() {
       <Header />
 
       <Styled.Container as="main">
-        <Styled.Tabs>
+        <Styled.Tabs activeTab={tab === 'signin' ? 0 : 1}>
           <Styled.Tab
             active={tab === 'signin'}
             onClick={() => handleTabClick('signin')}

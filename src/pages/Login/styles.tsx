@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components';
+import { Children } from 'react';
+
 import { rem } from '@assets/styles/utils';
 
 export const Container = styled.div`
@@ -12,10 +14,29 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-export const Tabs = styled.div`
+type StyledTabsProps = {
+  activeTab: number;
+};
+
+export const Tabs = styled.div<StyledTabsProps>`
   width: 100%;
   display: flex;
   margin-bottom: ${rem(40)};
+  position: relative;
+
+  &::after {
+    width: 50%;
+    height: 2px;
+    background-color: rgba(23, 23, 23, 1);
+    transition: left 300ms ease;
+    position: absolute;
+    bottom: 0;
+
+    ${({ activeTab, children }) => children && css`
+      content: '';
+      left: ${`${(100 / Children.toArray(children).length) * activeTab}%`};
+    `}
+  }
 `;
 
 type StyledTabProps = {
@@ -29,7 +50,7 @@ export const Tab = styled.button<StyledTabProps>`
   flex: 1;
   background-color: transparent;
   padding: 1rem 0;
-  border-bottom: 2px solid rgba(23, 23, 23, 1);
+  border-bottom: 2px solid rgba(23, 23, 23, 0.5);
 
   font-family: inherit;
   font-weight: 500;
@@ -44,7 +65,7 @@ export const Tab = styled.button<StyledTabProps>`
     cursor: pointer;
 
     &:hover {
-      opacity: 1;
+      opacity: 0.75;
     }
   `}
 
