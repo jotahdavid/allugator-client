@@ -6,8 +6,9 @@ import { rem } from '@assets/styles/utils';
 export const Container = styled.div`
   width: 90%;
   max-width: ${rem(460)};
-  margin: 0 auto;
-  height: calc(80% - ${rem(80)});
+  margin: 0 auto 4rem;
+  padding: 4rem 0;
+  flex: 1;
 
   display: flex;
   flex-direction: column;
