@@ -5,7 +5,7 @@ export interface SubscriptionResponse {
   id: string;
   price: number;
   expiresAt: string;
-  product: ProductResponse
+  product: ProductResponse;
 }
 
 class SubscriptionsService {

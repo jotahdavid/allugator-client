@@ -22,10 +22,8 @@ export function ProductInfo() {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-
       try {
         const productData = await ProductsService.getProductById(productId!);
-
         setProduct(productData);
       } catch {
         navigate('/');

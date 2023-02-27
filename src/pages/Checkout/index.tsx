@@ -56,7 +56,6 @@ export function Checkout() {
       setIsLoading(true);
       try {
         const product = await ProductsService.getProductById(productId!);
-
         if (!product) {
           navigate('/');
         }
