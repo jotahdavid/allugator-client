@@ -76,7 +76,7 @@ export function SubscriptionHistory() {
               key={subscription.id}
               imageUrl={product.imageUrl}
               name={product.name}
-              price={product.price}
+              price={product.rentPrice}
               active={today < new Date(subscription.expiresAt)}
               expiresAt={new Date(subscription.expiresAt)}
             />
