@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, RefObject, useEffect } from 'react';
 import { CheckCircle, XCircle } from 'phosphor-react';
 
 import { ToastMessageType } from '@lib/toast';
@@ -11,10 +11,14 @@ interface ToastMessageProps {
     type?: ToastMessageType;
     duration?: number;
   };
+  isLeaving: boolean;
+  animatedRef: RefObject<HTMLDivElement>;
   onRemove: (id: number) => void;
 }
 
-export const ToastMessage = memo(({ message, onRemove }: ToastMessageProps) => {
+export const ToastMessage = memo(({
+  message, isLeaving, animatedRef, onRemove,
+}: ToastMessageProps) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       onRemove(message.id);
@@ -33,6 +37,8 @@ export const ToastMessage = memo(({ message, onRemove }: ToastMessageProps) => {
       onClick={handleRemoveToast}
       tabIndex={0}
       role="button"
+      isLeaving={isLeaving}
+      ref={animatedRef}
     >
       {message.type === 'sucess' && (
         <CheckCircle size={22} />

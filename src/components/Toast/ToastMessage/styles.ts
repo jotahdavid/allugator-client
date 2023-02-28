@@ -26,8 +26,20 @@ const messageIn = keyframes`
   }
 `;
 
+const messageOut = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+`;
+
 type StyledContainerProps = {
-  type: ToastMessageType
+  type: ToastMessageType;
+  isLeaving: boolean;
 };
 
 export const Container = styled.div<StyledContainerProps>`
@@ -48,6 +60,8 @@ export const Container = styled.div<StyledContainerProps>`
   animation: ${messageIn} 300ms;
 
   ${({ type }) => containerVariants[type] || containerVariants.default}
+
+  ${({ isLeaving }) => isLeaving && css`animation: ${messageOut} 200ms forwards;`}
 
   & + & {
     margin-top: ${rem(12)};
