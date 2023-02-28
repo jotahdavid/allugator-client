@@ -3,8 +3,10 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { CaretDown } from 'phosphor-react';
+import { AxiosError } from 'axios';
 
 import ProductsService, { OrderBy, ProductResponse } from '@services/ProductsService';
+import toast from '@lib/toast';
 
 import { Search } from '@components/Search';
 import { ProductCard } from '@components/ProductList/ProductCard';
@@ -35,7 +37,9 @@ export function ProductList() {
         const productList = await ProductsService.listProducts(filter);
         setProducts(productList);
       } catch (err) {
-        console.error(err);
+        if ((err instanceof AxiosError)) {
+          toast.danger(err.message);
+        }
       } finally {
         setIsLoadingProducts(false);
       }

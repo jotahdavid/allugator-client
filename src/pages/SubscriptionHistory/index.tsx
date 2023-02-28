@@ -3,10 +3,11 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cookies from 'js-cookie';
-import axios from 'axios';
+import { AxiosError } from 'axios';
 
 import SubscriptionsService, { SubscriptionResponse } from '@services/SubscriptionsService';
 import { useAuth } from '@hooks/useAuth';
+import toast from '@lib/toast';
 
 import { Header } from '@components/Header';
 import { SubscriptionItem } from '@components/SubscriptionItem';
@@ -41,8 +42,8 @@ export function SubscriptionHistory() {
         const subscriptionsData = await SubscriptionsService.listSubscriptionsByToken(token);
         setSubscriptions(subscriptionsData);
       } catch (err) {
-        if ((err instanceof axios.AxiosError)) {
-          console.error(err.message);
+        if ((err instanceof AxiosError)) {
+          toast.danger(err.message);
         }
         navigate('/');
       } finally {

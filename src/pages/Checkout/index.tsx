@@ -4,11 +4,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import cookies from 'js-cookie';
-import axios from 'axios';
+import { AxiosError } from 'axios';
 
 import ProductsService from '@services/ProductsService';
 import SubscriptionsService from '@services/SubscriptionsService';
 import { useAuth } from '@hooks/useAuth';
+import toast from '@lib/toast';
 
 import { Header } from '@components/Header';
 import { InputField } from '@components/InputField';
@@ -55,11 +56,9 @@ export function Checkout() {
     (async () => {
       setIsLoading(true);
       try {
-        const product = await ProductsService.getProductById(productId!);
-        if (!product) {
-          navigate('/');
-        }
+        await ProductsService.getProductById(productId!);
       } catch {
+        toast.danger('Produto não encontrado');
         navigate('/');
       } finally {
         setIsLoading(false);
@@ -77,7 +76,7 @@ export function Checkout() {
 
       navigate('/subscriptions');
     } catch (err) {
-      if (!(err instanceof axios.AxiosError)) {
+      if (!(err instanceof AxiosError)) {
         console.error(err);
         return;
       }

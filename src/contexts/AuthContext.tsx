@@ -2,9 +2,10 @@ import {
   createContext, ReactNode, useCallback, useEffect, useMemo, useState,
 } from 'react';
 import cookies from 'js-cookie';
-import axios from 'axios';
+import { AxiosError } from 'axios';
 
 import UsersService, { User, UserCreation, UserCredential } from '@services/UsersService';
+import toast from '@lib/toast';
 
 interface AuthContextValue {
   user: User | null;
@@ -39,8 +40,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
         setUser(userData);
       } catch (err) {
-        if (err instanceof axios.AxiosError) {
-          console.error(err.message);
+        if (err instanceof AxiosError) {
+          toast.danger('Não foi possível estabelecer conexão com o servidor');
         }
       } finally {
         setIsLoading(false);

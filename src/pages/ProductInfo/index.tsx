@@ -4,6 +4,7 @@ import { ShoppingBag } from 'phosphor-react';
 
 import ProductsService, { ProductResponse } from '@services/ProductsService';
 import R$ from '@utils/formatCurrency';
+import toast from '@lib/toast';
 
 import { Header } from '@components/Header';
 import { Loader } from '@components/Loader';
@@ -26,7 +27,8 @@ export function ProductInfo() {
         const productData = await ProductsService.getProductById(productId!);
         setProduct(productData);
       } catch {
-        navigate('/');
+        toast.danger('Produto não encontrado');
+        navigate('/', { replace: true });
       } finally {
         setIsLoading(false);
       }
