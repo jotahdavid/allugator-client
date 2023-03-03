@@ -80,9 +80,7 @@ export function Checkout() {
         console.error(err);
         return;
       }
-
-      // eslint-disable-next-line no-alert
-      alert(err.response?.data.error ?? 'Something went wrong');
+      toast.danger('Um erro inesperado aconteceu');
     }
   };
 

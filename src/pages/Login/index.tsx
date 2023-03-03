@@ -84,7 +84,7 @@ export function Login() {
           toast.danger('E-mail ou senha são inválidos');
           break;
         default:
-          toast.danger(err.response?.data.error ?? 'Algum erro inesperado aconteceu');
+          toast.danger(err.response?.data.error ?? 'Um erro inesperado aconteceu');
       }
     }
   };
