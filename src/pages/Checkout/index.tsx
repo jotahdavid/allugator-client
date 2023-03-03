@@ -17,6 +17,7 @@ import { Loader } from '@components/Loader';
 import { Spinner } from '@components/Spinner';
 
 import * as Styled from './styles';
+import { Footer } from '@components/Footer';
 
 const checkoutSchema = z.object({
   name: z.string().min(1, 'Campo obrigatório'),
@@ -164,6 +165,8 @@ export function Checkout() {
           </Styled.Side>
         </Styled.Form>
       </Styled.Container>
+
+      <Footer />
     </>
   );
 }

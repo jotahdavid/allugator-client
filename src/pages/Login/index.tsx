@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 
 import { useAuth } from '@hooks/useAuth';
 import { Header } from '@components/Header';
+import { Footer } from '@components/Footer';
 import toast from '@lib/toast';
 
 import { SignInForm, SignUpForm } from './Forms';
@@ -119,6 +120,8 @@ export function Login() {
           <SignUpForm onSubmit={onSubmit} />
         )}
       </Styled.Container>
+
+      <Footer />
     </FormProvider>
   );
 }

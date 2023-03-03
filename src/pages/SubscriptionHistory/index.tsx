@@ -12,6 +12,7 @@ import toast from '@lib/toast';
 import { Header } from '@components/Header';
 import { SubscriptionItem } from '@components/SubscriptionItem';
 import { Loader } from '@components/Loader';
+import { Footer } from '@components/Footer';
 
 import * as Styled from './styles';
 
@@ -84,6 +85,8 @@ export function SubscriptionHistory() {
           ))}
         </Styled.Subscriptions>
       </Styled.Container>
+
+      <Footer />
     </>
   );
 }

@@ -8,6 +8,7 @@ import toast from '@lib/toast';
 
 import { Header } from '@components/Header';
 import { Loader } from '@components/Loader';
+import { Footer } from '@components/Footer';
 
 import * as Styled from './styles';
 
@@ -67,6 +68,8 @@ export function ProductInfo() {
           </Link>
         </Styled.Details>
       </Styled.Container>
+
+      <Footer />
     </>
   );
 }

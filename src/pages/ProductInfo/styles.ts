@@ -5,6 +5,7 @@ export const Container = styled.div`
   max-width: ${rem(1280)};
   margin: 0 auto;
   padding: 0 ${rem(60)} ${rem(120)};
+  flex: 1;
 
   display: flex;
   justify-content: space-evenly;

@@ -5,6 +5,7 @@ export const Container = styled.main`
   width: 90%;
   max-width: ${rem(700)};
   margin: 0 auto;
+  flex: 1;
 
   h1 {
     font-size: ${rem(36)};
