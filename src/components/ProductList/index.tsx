@@ -38,7 +38,7 @@ export function ProductList() {
         setProducts(productList);
       } catch (err) {
         if ((err instanceof AxiosError)) {
-          toast.danger(err.message);
+          toast.danger('Não foi possível carregar os produtos', 0);
         }
       } finally {
         setIsLoadingProducts(false);

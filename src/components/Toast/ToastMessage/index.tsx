@@ -20,6 +20,8 @@ export const ToastMessage = memo(({
   message, isLeaving, animatedRef, onRemove,
 }: ToastMessageProps) => {
   useEffect(() => {
+    if (message.duration === 0) return undefined;
+
     const timeoutId = setTimeout(() => {
       onRemove(message.id);
     }, message.duration ?? 4000);
