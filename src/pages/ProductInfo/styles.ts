@@ -4,7 +4,7 @@ import { rem } from '@assets/styles/utils';
 export const Container = styled.div`
   max-width: ${rem(1280)};
   margin: 0 auto;
-  padding: 0 ${rem(60)} ${rem(120)};
+  padding: 0 ${rem(60)} ${rem(20)};
   flex: 1;
 
   display: flex;
@@ -13,15 +13,13 @@ export const Container = styled.div`
   gap: 1rem;
 
   @media screen and (max-width: ${rem(720)}) {
-    padding: 0 ${rem(36)} ${rem(60)};
-    gap: 0.25rem;
+    padding: ${rem(36)};
     flex-wrap: wrap;
   }
 `;
 
 export const Preview = styled.div`
   max-width: ${rem(320)};
-  height: ${rem(520)};
 
   display: flex;
   align-items: center;
