@@ -71,7 +71,10 @@ export function Checkout() {
     try {
       const token = cookies.get('allugacell.token');
 
-      if (!token) return;
+      if (!token) {
+        navigate('/login', { replace: true, state: { redirect: location.pathname } });
+        return;
+      }
 
       await SubscriptionsService.createSubscriptionByToken(token, productId!);
 

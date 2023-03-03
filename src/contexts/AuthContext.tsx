@@ -52,14 +52,14 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const handleRegister = useCallback(async (newUser: UserCreation) => {
     const { user: userLogged, token } = await UsersService.createUser(newUser);
 
-    cookies.set('allugacell.token', token, { sameSite: 'None', secure: true });
+    cookies.set('allugacell.token', token, { sameSite: 'None' });
     setUser(userLogged);
   }, []);
 
   const handleLogin = useCallback(async (userCredential: UserCredential) => {
     const { user: userLogged, token } = await UsersService.login(userCredential);
 
-    cookies.set('allugacell.token', token, { sameSite: 'None', secure: true });
+    cookies.set('allugacell.token', token, { sameSite: 'None' });
     setUser(userLogged);
   }, []);
 
