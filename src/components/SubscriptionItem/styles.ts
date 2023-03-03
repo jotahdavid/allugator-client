@@ -22,6 +22,11 @@ export const Container = styled.div<StyledContainerProps>`
       text-decoration: line-through;
     }
   `}
+
+  @media screen and (max-width: ${rem(900)}) {
+    display: flex;
+    column-gap: 1rem;
+  }
 `;
 
 export const Preview = styled.div`
@@ -40,6 +45,11 @@ export const Preview = styled.div`
     max-height: 100%;
     max-width: 100%;
     margin: 0 auto;
+  }
+
+  @media screen and (max-width: ${rem(900)}) {
+    flex-basis: ${rem(80)};
+    padding: 0.25rem;
   }
 `;
 
@@ -68,6 +78,20 @@ export const Details = styled.div`
   .product-status {
     font-weight: 600;
   }
+
+  @media screen and (max-width: ${rem(900)}) {
+    margin-right: 0.5rem;
+
+    .product-name {
+      font-size: ${rem(16)};
+    }
+
+    .product-price,
+    .product-status {
+      display: block;
+      font-size: ${rem(14)};
+    }
+  }
 `;
 
 export const DueDate = styled.div`
@@ -78,5 +102,10 @@ export const DueDate = styled.div`
     display: block;
     margin-bottom: 4px;
     font-weight: 700;
+  }
+
+  @media screen and (max-width: ${rem(900)}) {
+    margin-top: 0.25rem;
+    font-size: ${rem(12)};
   }
 `;
