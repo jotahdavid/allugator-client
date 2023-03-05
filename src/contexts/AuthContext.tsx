@@ -43,7 +43,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       } catch (err) {
         if (err instanceof AxiosError) {
           if (err.response?.data.error === 'Token invalid') {
-            // cookies.remove('allugacell.token');
+            cookies.remove('allugacell.token');
             return;
           }
           toast.danger('Não foi possível autenticar o usuário');
