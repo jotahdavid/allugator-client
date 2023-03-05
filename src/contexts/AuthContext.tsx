@@ -3,6 +3,7 @@ import {
 } from 'react';
 import cookies from 'js-cookie';
 import { AxiosError } from 'axios';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 import UsersService, { User, UserCreation, UserCredential } from '@services/UsersService';
 import toast from '@lib/toast';
@@ -41,7 +42,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         setUser(userData);
       } catch (err) {
         if (err instanceof AxiosError) {
-          toast.danger('Não foi possível estabelecer conexão com o servidor');
+          if (err.response?.data.error === 'Token invalid') {
+            // cookies.remove('allugacell.token');
+            return;
+          }
+          toast.danger('Não foi possível autenticar o usuário');
         }
       } finally {
         setIsLoading(false);
@@ -51,20 +56,34 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   const handleRegister = useCallback(async (newUser: UserCreation) => {
     const { user: userLogged, token } = await UsersService.createUser(newUser);
+    const decodedToken = jwtDecode<JwtPayload>(token);
 
-    cookies.set('allugacell.token', token, { sameSite: 'None' });
+    if (decodedToken.exp) {
+      cookies.set('allugacell.token', token, {
+        sameSite: 'Strict',
+        path: '/',
+        expires: new Date(decodedToken.exp * 1000),
+      });
+    }
     setUser(userLogged);
   }, []);
 
   const handleLogin = useCallback(async (userCredential: UserCredential) => {
     const { user: userLogged, token } = await UsersService.login(userCredential);
+    const decodedToken = jwtDecode<JwtPayload>(token);
 
-    cookies.set('allugacell.token', token, { sameSite: 'None' });
+    if (decodedToken.exp) {
+      cookies.set('allugacell.token', token, {
+        sameSite: 'Strict',
+        path: '/',
+        expires: new Date(decodedToken.exp * 1000),
+      });
+    }
     setUser(userLogged);
   }, []);
 
   const handleLogout = useCallback(() => {
-    cookies.remove('allugacell.token');
+    cookies.remove('allugacell.token', { path: '/' });
     setUser(null);
   }, []);
 

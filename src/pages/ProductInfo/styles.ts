@@ -4,7 +4,7 @@ import { rem } from '@assets/styles/utils';
 export const Container = styled.div`
   max-width: ${rem(1280)};
   margin: 0 auto;
-  padding: 0 ${rem(60)} ${rem(20)};
+  padding: 2rem ${rem(60)};
   flex: 1;
 
   display: flex;
