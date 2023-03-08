@@ -5,6 +5,7 @@ import { Login } from '@pages/Login';
 import { ProductInfo } from '@pages/ProductInfo';
 import { SubscriptionHistory } from '@pages/SubscriptionHistory';
 import { Checkout } from '@pages/Checkout';
+import { Page404 } from '@pages/404';
 
 export default function AppRoutes() {
   return (
@@ -19,6 +20,8 @@ export default function AppRoutes() {
       <Route path="/checkout/:id" element={<Checkout />} />
 
       <Route path="/subscriptions" element={<SubscriptionHistory />} />
+
+      <Route path="*" element={<Page404 />} />
     </Routes>
   );
 }
