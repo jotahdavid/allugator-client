@@ -1,4 +1,10 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {
+  Route,
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
 
 import { Products } from '@pages/Products';
 import { Login } from '@pages/Login';
@@ -7,9 +13,9 @@ import { SubscriptionHistory } from '@pages/SubscriptionHistory';
 import { Checkout } from '@pages/Checkout';
 import { Page404 } from '@pages/404';
 
-export default function AppRoutes() {
-  return (
-    <Routes>
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
       <Route path="/" element={<Products />} />
       <Route path="/login" element={<Login />} />
 
@@ -22,6 +28,12 @@ export default function AppRoutes() {
       <Route path="/subscriptions" element={<SubscriptionHistory />} />
 
       <Route path="*" element={<Page404 />} />
-    </Routes>
+    </>,
+  ),
+);
+
+export default function AppRoutes() {
+  return (
+    <RouterProvider router={router} />
   );
 }
