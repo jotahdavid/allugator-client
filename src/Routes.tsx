@@ -13,6 +13,8 @@ import { SubscriptionHistory } from '@pages/SubscriptionHistory';
 import { Checkout } from '@pages/Checkout';
 import { Page404 } from '@pages/404';
 
+import ProductsService from '@services/ProductsService';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -20,7 +22,13 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
 
       <Route path="/product" element={<Navigate to="/" />} />
-      <Route path="/product/:id" element={<ProductInfo />} />
+      <Route
+        path="/product/:id"
+        element={<ProductInfo />}
+        loader={({ params }) => ({
+          product: ProductsService.getProductById(params.id!),
+        })}
+      />
 
       <Route path="/checkout" element={<Navigate to="/" />} />
       <Route path="/checkout/:id" element={<Checkout />} />

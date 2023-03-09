@@ -1,45 +1,24 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Await, Link, useLoaderData } from 'react-router-dom';
 import { ShoppingBag } from 'phosphor-react';
 
-import ProductsService, { ProductResponse } from '@services/ProductsService';
+import type { ProductResponse } from '@services/ProductsService';
 import R$ from '@utils/formatCurrency';
-import toast from '@lib/toast';
 
 import { Header } from '@components/Header';
 import { Loader } from '@components/Loader';
 import { Footer } from '@components/Footer';
 
+import { ErrorProductLoad } from './ErrorProductLoad';
 import * as Styled from './styles';
 
 type Product = ProductResponse;
 
-export function ProductInfo() {
-  const [product, setProduct] = useState<Product | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+interface ProductInfoContentProps {
+  product: Product;
+}
 
-  const { id: productId } = useParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      try {
-        const productData = await ProductsService.getProductById(productId!);
-        setProduct(productData);
-      } catch {
-        toast.danger('Produto não encontrado');
-        navigate('/', { replace: true });
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [productId, navigate]);
-
-  if (isLoading || !product) {
-    return <Loader loading />;
-  }
-
+function ProductInfoContent({ product }: ProductInfoContentProps) {
   return (
     <>
       <Header />
@@ -71,5 +50,17 @@ export function ProductInfo() {
 
       <Footer />
     </>
+  );
+}
+
+export function ProductInfo() {
+  const loaderData = useLoaderData() as { product: Promise<Product> };
+
+  return (
+    <Suspense fallback={<Loader loading />}>
+      <Await resolve={loaderData.product} errorElement={<ErrorProductLoad />}>
+        {(product) => <ProductInfoContent product={product} />}
+      </Await>
+    </Suspense>
   );
 }
