@@ -6,6 +6,7 @@ import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
 import { CartItem } from '@components/CartItem';
 
+import { CartFooter } from './CartFooter';
 import * as Styled from './styles';
 
 type Product = ProductResponse;
@@ -21,6 +22,11 @@ export function Cart() {
       imageUrl: 'https://www.pngmart.com/files/21/iPhone-13-PNG-HD.png',
     },
   ]);
+
+  const totalPrice = products.reduce(
+    (acc, { rentPrice }) => acc + rentPrice,
+    0,
+  );
 
   return (
     <>
@@ -47,7 +53,13 @@ export function Cart() {
         </Styled.Products>
       </Styled.Container>
 
-      <Footer />
+      {products.length > 0 ? (
+        <CartFooter
+          total={totalPrice}
+        />
+      ) : (
+        <Footer />
+      )}
     </>
   );
 }
