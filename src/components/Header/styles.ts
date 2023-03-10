@@ -81,6 +81,20 @@ export const AccountIcons = styled.div`
   gap: ${rem(24)};
 
   position: relative;
+
+  @media screen and (max-width: ${rem(900)}) {
+    gap: ${rem(16)};
+
+    svg {
+      height: ${rem(32)};
+    }
+  }
+
+  @media screen and (max-width: ${rem(360)}) {
+    svg {
+      height: ${rem(28)};
+    }
+  }
 `;
 
 export const LoginButton = styled.button`
