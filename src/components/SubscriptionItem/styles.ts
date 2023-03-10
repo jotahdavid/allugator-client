@@ -26,6 +26,7 @@ export const Container = styled.div<StyledContainerProps>`
   @media screen and (max-width: ${rem(900)}) {
     display: flex;
     column-gap: 1rem;
+    max-width: ${rem(520)};
   }
 `;
 
@@ -95,6 +96,7 @@ export const Details = styled.div`
 `;
 
 export const DueDate = styled.div`
+  margin-left: auto;
   text-align: right;
   color: rgba(23, 23, 23, 0.8);
 

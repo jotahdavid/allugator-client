@@ -12,6 +12,7 @@ import { ProductInfo } from '@pages/ProductInfo';
 import { SubscriptionHistory } from '@pages/SubscriptionHistory';
 import { Checkout } from '@pages/Checkout';
 import { Page404 } from '@pages/404';
+import { Cart } from '@pages/Cart';
 
 import ProductsService from '@services/ProductsService';
 
@@ -34,6 +35,8 @@ const router = createBrowserRouter(
       <Route path="/checkout/:id" element={<Checkout />} />
 
       <Route path="/subscriptions" element={<SubscriptionHistory />} />
+
+      <Route path="/cart" element={<Cart />} />
 
       <Route path="*" element={<Page404 />} />
     </>,

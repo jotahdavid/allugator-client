@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { rem } from '@assets/styles/utils';
 
 export const Container = styled.main`
@@ -21,12 +22,12 @@ export const Container = styled.main`
     max-width: ${rem(520)};
 
     h1 {
-      font-size: ${rem(28)};
+      font-size: ${rem(32)};
     }
   }
 `;
 
-export const Subscriptions = styled.ul`
+export const Products = styled.ul`
   list-style: none;
 
   display: flex;
@@ -34,7 +35,7 @@ export const Subscriptions = styled.ul`
   align-items: center;
 `;
 
-export const EmptySubscriptions = styled.div`
+export const EmptyCartMessage = styled.div`
   width: 90%;
   max-width: ${rem(400)};
   background-color: #EBEBEB;

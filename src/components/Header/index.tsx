@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { User } from 'phosphor-react';
+import { ShoppingCart, User } from 'phosphor-react';
 
 import { useAuth } from '@hooks/useAuth';
 import * as Styled from './styles';
@@ -38,6 +38,9 @@ export function Header() {
 
               {isAuthenticated && (
                 <>
+                  <Link to="/cart">
+                    <ShoppingCart color="#fff" size={40} />
+                  </Link>
                   <Styled.Button onClick={handleUserButtonClick}>
                     <User color="#fff" size={40} />
                   </Styled.Button>
